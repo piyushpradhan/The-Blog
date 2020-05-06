@@ -1,0 +1,82 @@
+{% extends 'blogapp/base.html' %}
+
+{% block content %}
+      <nav class="navBar navbar navbar-light bg-light justify-content-between">
+      <a href="{% url 'post_list' %}" class="navbar-brand" style="font-family: 'Playfair Display', serif; font-size: 35px; margin-left: 400px;">Blog</a>
+      <form class="form-inline">
+        {% if user.is_authenticated %}
+            <i class="adjust material-icons">account_circle</i>
+            <p class="account">Hi, {{ user.username }}!</p>   
+        {% endif %}
+        {% if user.is_authenticated == False %}
+            <a href="{% url 'login' %}" class="signin" >&#128274; Sign In</a>
+        {% endif%}
+        {% if user.is_authenticated %}
+          <button class="logout" ><a style="text-decoration: none; color: white;" href="{% url 'logout' %}">Logout</a></button>
+        {% endif %}
+      </form>
+    </nav>
+    <center><div class="container_detail">
+        <p class="title_detail">{{ post.title }}</p>
+        <i><p class="author_detail">Written By - {{ post.author }}</p></i>
+        <p class="text_detail" >{{ post.text }}</p>
+        <footer class="date_detail">{{post.published_date}}</footer>
+        <div class="edit_detail">
+            <a href="{% url 'post_edit' pk=post.pk%}" class="edit_detail_icon">
+                <i class="material-icons">mode_edit</i>
+            </a>
+        </div>
+        <div class="edit_detail_delete">
+            <a href="{% url 'post_delete' pk=post.pk %}" style="text-decoration: none; color: white"><i class="edit_detail_delete_icon material-icons">delete</i>
+            </a>
+        </div>
+        <div class="edit_detail_comment">
+            <a href="{% url 'add_comment' pk=post.pk %}" style="text-decoration: none; color: white">
+                <span class="edit_detail_comment_icon material-icons">chat</span>
+            </a>
+        </div>
+
+        <p class="comments_heading">Comments</p>
+
+
+        {% for comment in post.comments.all %}
+
+            <div id="comments" class="comments">
+
+                <p class="commentD">{{ comment.created_date }}</p> 
+                <div class="commentA">
+                    <i class="material-icons">account_circle</i><p class="comment_author">{{ comment.author}}</p>
+                </div>
+                <p class="commentT">{{ comment.text }}</p>
+            </div>
+        {% empty %}
+            <p style="margin-left: 30px;"> No comments yet :( </p>
+        {% endfor %}
+    </div></center>
+
+
+
+
+    {% comment %} JavaScipt {% endcomment %}
+
+
+
+
+    <script>
+      const edit_container = document.querySelector('.edit_detail');
+      const edit_button = document.querySelector('.edit_detail_icon');
+      edit_container.addEventListener('mouseover', () => {edit_button.classList.add('changeColorBlue');})
+      edit_container.addEventListener('mouseout', () => {edit_button.classList.remove('changeColorBlue');})
+
+      const delete_button = document.querySelector('.edit_detail_delete_icon');
+      const delete_container = document.querySelector('.edit_detail_delete');
+      delete_container.addEventListener('mouseover', () => {delete_button.classList.add('changeColorRed');})
+      delete_container.addEventListener('mouseout', () => {delete_button.classList.remove('changeColorRed');})
+
+      const add_comment_container = document.querySelector('.edit_detail_comment');
+      const add_comment_icon = document.querySelector('.edit_detail_comment_icon');
+      add_comment_container.addEventListener('mouseover', () => {add_comment_icon.classList.add('changeColorBlue');})
+      add_comment_container.addEventListener('mouseout', () => {add_comment_icon.classList.remove('changeColorBlue');})
+
+    </script>
+{% endblock %}

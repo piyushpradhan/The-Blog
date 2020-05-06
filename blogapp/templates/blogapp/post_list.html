@@ -1,0 +1,43 @@
+{% extends 'blogapp/base.html' %}
+{% load static %}
+
+{% block content %}
+    
+    
+    <nav class="navBar navbar navbar-light bg-light justify-content-between">
+      <a class="navbar-brand" style="font-family: 'Playfair Display', serif; font-size: 35px; margin-left: 400px;">Blog</a>
+      <form class="form-inline">
+        {% if user.is_authenticated %}
+            <i class="adjust material-icons">account_circle</i>
+            <p class="account">Hi, {{ user.username }}!</p>   
+        {% endif %}
+        {% if user.is_authenticated == False %}
+            <a href="{% url 'login' %}" class="signin" >&#128274; Sign In</a>
+        {% endif%}
+        {% if user.is_authenticated %}
+          <button class="logout" ><a style="text-decoration: none; color: white;" href="{% url 'logout' %}">Logout</a></button>
+        {% endif %}
+      </form>
+    </nav>
+
+
+    <div class="topslider"></div>
+    <center><p class="blog">Blog</p></center>
+
+    <a href="{% url 'post_new' %}"><button type="button" style="border-radius: 50%;" class="addNote btn btn-primary btn-circle btn-xl">+</button></a>
+
+    {% for post in posts %}
+        <center><div class="container">
+                <div class="title">
+                    <a href="{% url 'post_detail' pk=post.pk %}" style="text-decoration: none;"><p>{{ post.title }}</p></a>
+                    <h5 class="authorname">{{ post.user }}</h5>
+                </div>
+                <div class="text">
+                    <p>{{ post.text }}</p>
+                </div>
+                <p class="textFooter">{{ post.published_date}}</p>
+                <a class="commentsLink" style="text-decoration: none;" href="{% url 'post_detail' pk=post.pk %}">Comments : {{ post.comments.count }}</a>
+        </div></center>
+    {% endfor %}
+
+{% endblock %}

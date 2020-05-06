@@ -1,0 +1,20 @@
+{% extends 'blogapp/base.html' %}
+
+{% block content %}
+    <p class="newPost" style="margin-left: -20px;"> Add Comment </p> 
+
+    <form method="POST" name="comment-form">{% csrf_token %}
+            <p class="titleEdit" style="margin-left: -20px;">
+                <label for="id_author" id="id_title_label" >Author</label>
+                <input type="text" name='author' maxlength="200" required id="id_title">
+                </input>
+            </p>
+            <p class="textEdit">
+                <label for="id_text" id="id_text_label" style="margin-left: -20px;" >Comment</label>
+                <textarea name="text" cols="40" rows="10" required id="id_text"></textarea>
+            </p>
+            <button type="submit" class="submitPost">Submit</button>
+        </form>
+
+
+{% endblock %}

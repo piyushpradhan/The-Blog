@@ -1,0 +1,509 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"/>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Crete+Round&family=Hammersmith+One:wght@300&family=Playfair+Display:wght@900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;800&family=Source+Code+Pro:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+      
+      .title{
+        width: 350px;
+        height: 300px;
+        align-content: flex-start;
+        background-color: white;
+        font-size: 50px;
+        color: white;
+        font-family: 'Crete Round', serif;
+        border-radius:30px 0px 0px 30px;
+        margin-left: -450px;
+        transition: 0.3s all;
+        text-decoration: none;
+        overflow-wrap: break-word;
+        overflow: hidden;
+      }
+      .adjust {
+        position: absolute;
+        right: 610px;
+        top: 25px;
+        transform: scale(1.6);
+      }
+      .text{
+        background-color: white;
+        color: black;
+        display: flex;
+        align-content: flex-start;
+        align-items: flex-start;
+        justify-content: flex-start;
+        width: 440px;
+        height: 250px;
+        margin-top: -300px;
+        padding-top: 25px;
+        margin-left: 333px;
+        overflow-wrap: break-word;
+        transition: 0.3s all;
+        font-size: 20px;
+        text-align: left;
+        font-weight: 300;
+        font-family: 'Cairo', sans-serif;
+        padding-left: 10px;
+        overflow: hidden;
+        border-radius: 0px 30px 30px 0px;
+      }
+      .textFooter
+      {
+        position: absolute;
+        margin-top: 10px;
+        margin-left: 580px;
+        font-size: 15px;
+        color: lightgrey;
+      }
+      .commentsLink{
+        text-decoration: none;
+        position: absolute;
+        margin-top: 10px;
+      }
+      .blog{
+        font-size: 200px;
+        font-family: 'Playfair Display', serif;
+        margin-bottom: 150px;
+        padding-top: 100px;
+        background-color: #383838;
+        height: 550px;
+        color: white;
+        text-shadow: 3px 3px 10px black;
+      }
+      .container{
+        width: 800px;
+        height: 300px;
+        margin-top: 10px;  
+        border-radius:30px 30px 30px 30px;     
+        transition: 0.3s all; 
+        z-index: -10;
+      }
+      .container:hover{
+         box-shadow: 10px 10px 10px 1px lightgrey;
+         transform: translate(-2%, -2%);
+      }
+      .topslider{
+        background-color: orange;
+        height: 5px;
+        position: fixed;
+        margin-top: 70px;
+      }
+      .navBar{
+        position: fixed;
+        width: 100%;
+        box-shadow: 0px 2px 10px 2px lightgrey;
+        background-color: white;
+        z-index: 10;
+      }
+      .cursor{
+        width: 50px;
+        height: 50px;
+        background-color: white;
+        opacity: 0.4;
+        transition: 0s all;
+        position: absolute;
+      }
+      .addNote{
+        position: fixed;
+        right: 100px;
+        width: 50px;
+        height: 50px;
+        overflow-wrap: break-word;
+        font-weight: 900;
+        transition: 0.2s all;
+      }
+      .addNote:hover{
+        background-color: white;
+        border: 2px solid blue;
+        color: blue;
+        font-weight: 900;
+      }
+      .account{
+        font-size: 20px;
+        right: 430px;
+        top: 20px;
+        position: absolute;
+
+      }
+      .logout{
+        position: absolute;
+        color: white;
+        width: 70px;
+        height: 30px;
+        top: 20px;
+        right: 350px;
+        background-color: blue;
+        border-radius: 5px;
+        border: none;
+        transition: 0.2s all;
+      }
+      .logout:hover{
+        background-color: darkblue;     
+      }
+      .signin{
+        position: absolute;
+        right: 440px;
+        font-size: 15px;
+        top: 30px;
+      }
+
+
+
+      .newPost{
+        font-size: 60px;
+        font-family: 'Source Code Pro', monospace;
+        position: absolute;
+        left: 400px;
+        top: 120px;
+      }
+
+      .titleEdit{
+        position: absolute;
+        top: 270px;
+        left: 400px;
+        font-family: 'Source Code Pro', monospace;
+      }
+      #id_title_label {
+        font-size: 30px;
+        font-family: 'Source Code Pro', monospace;
+        margin-top: 5px;
+        color: grey;
+      }
+      #id_title{
+        position: absolute;
+        height: 60px;
+        background-color: #f2f2f2;
+        border: none;
+        border-left: 2px solid #b2b2b2;
+        width: 600px;
+        margin-left: 30px;
+        font-size: 25px;
+        outline: none;
+        font-family: 'Nunito', sans-serif;
+      }
+
+
+      .textEdit {
+        position: absolute;
+        top: 330px;
+        left: 400px;
+      }
+      #id_text_label{ 
+        font-size: 30px;
+        position: absolute;
+        color: grey;
+        margin-top: 20px;
+        font-family: 'Source Code Pro', monospace;
+      }
+      #id_text{
+        position: absolute;
+        margin-top: 30px;
+        margin-left: 118px;
+        width: 600px;
+        height: 400px;
+        background-color: #f2f2f2;
+        border: none;
+        border-left: 2px solid #b2b2b2;
+        text-align: left;
+        font-family: 'Nunito', sans-serif;
+      }
+
+
+      .submitPost{  
+        position: absolute;
+        width: 100px;
+        height: 50px;
+        border-radius: 50px;
+        top: 800px;
+        left: 1020px;
+        font-size: 23px;
+        font-weight: 500;
+        background-color: blue;
+        border: none;
+        color: white;
+      }
+
+
+      .container_detail{
+        text-align: left;
+        padding-top: 130px;
+        width: 800px;
+        word-wrap: break-word;
+      }
+
+      .title_detail{
+        font-family: 'Playfair Display', serif;
+        text-align: left;
+        font-size: 50px;
+      }
+      .author_detail{
+        font-size: 17px;
+        color: grey;
+      }
+      .text_detail{
+        font-family: 'Cairo', sans-serif;
+        font-size: 24px;
+        font-weight: 500;
+      }
+      .date_detail{
+        color: gray;
+        padding-bottom: 20px;
+      }
+      .edit_detail{
+        background-color: blue;
+        color: white;
+        height: 40px;
+        width: 40px;
+        align-items: center;
+        align-content: center;
+        justify-content: center;
+        border-radius: 50%;
+        position: fixed;
+        right: 300px;
+        top:300px;
+        transform: scale(1.5);
+        transition: 0.2s all;
+        border: 1px solid blue;
+      }
+      .edit_detail_icon{
+        color: white;
+        position: absolute;
+        margin-top: 7px; 
+        transition: 0.2s all;
+        margin-left: 7px;
+        width: fit-parent;
+        height: fit-parent;
+      }
+      .edit_detail:hover{
+        background: white;
+      }
+      .edit_detail_delete{
+        background-color: red;
+        color: white;
+        height: 40px;
+        width: 40px;
+        align-items: center;
+        align-content: center;
+        justify-content: center;
+        border-radius: 50%;
+        position: fixed;
+        right: 300px;
+        top: 380px;
+        transform: scale(1.5);
+        transition: 0.2s all;
+        border: 1px solid red;
+      }
+      .edit_detail_delete_icon{
+        color: white;
+        position: absolute;
+        margin-top: 7px; 
+        transition: 0.2s all;
+        margin-left: 7px;
+        width: fit-parent;
+        height: fit-parent;
+      }
+      .edit_detail_delete:hover{
+        background-color: white;
+      }
+      .edit_detail_comment{
+        background-color: blue;
+        color: white;
+        height: 40px;
+        width: 40px;
+        align-items: center;
+        align-content: center;
+        justify-content: center;
+        border-radius: 50%;
+        position: fixed;
+        right: 300px;
+        top:460px;
+        transform: scale(1.5);
+        transition: 0.2s all;
+        border: 1px solid blue;
+      }
+      .edit_detail_comment_icon{
+        color: white;
+        position: absolute;
+        margin-top: 8px; 
+        transition: 0.2s all;
+        margin-left: 7px;
+      }
+      .edit_detail_comment:hover{
+        background-color: white;
+      }
+      .changeColorRed{
+        color: red;
+      }
+      .changeColorBlue{
+        color: blue;
+      }
+
+      
+      .comments{
+        margin-top: 10px;
+        border-left: 3px solid lightgrey;
+        padding-left: 10px;
+      }
+      .comments_heading{
+        font-size: 30px;
+        font-family: 'Crete Round', sans-serif;
+      }
+      .comment_author{
+        position:  absolute;
+        margin-top: -25px;
+        margin-left: 30px;
+        font-size: 17px;
+        font-weight: 600;
+      }
+      .commentT{
+        font-size: 18px;
+        margin-left: 30px;
+      }
+      .commentD{
+        color: grey;
+        font-size: 13px;
+        position: absolute;
+        margin-left: 610px;
+      }
+
+
+
+
+      .border{
+        width: 500px;
+        height: 400px;
+        position: absolute;
+        background-color: white;
+        top: 26%;
+        z-index: -99;
+        left: 50%;
+        border: none;
+        border-left: 1px solid lightgrey;
+        transition: 0.3s all;
+        opacity: 0;
+      }
+      .blog_login{
+        font-family: 'Playfair Display', serif;
+        font-size: 100px;
+        position: absolute;
+        top: 37%;
+        left: 25%;
+        transition: 0.5s all;
+        z-index: -100;
+      }
+      .login_form{
+        position: absolute;
+        top: 38%;
+        left: 50%;
+         z-index: 9;
+      }
+      .username_input{
+        width: 450px;
+        height: 60px;
+        position: absolute;
+        margin-left: 200px;
+        margin-top: 5px;
+        font-family: 'Cairo', sans-serif;
+        font-size: 30px;
+        font-weight: 600;
+        background-color: #f2f2f2;
+        border: none;
+        border-radius: 5px;
+        padding-left: 10px;
+        transition: 0.5s all;
+      }
+      .password_input{
+        width: 450px;
+        height: 60px;
+        position: absolute;
+        margin-left: 200px;
+        margin-top: 90px;
+        font-family: 'Cairo', sans-serif;
+        font-size: 30px;
+        font-weight: 600;
+        background-color: #f2f2f2;
+        border: none;
+        border-radius: 5px;
+        padding-left: 10px;
+        transition: 0.5s all;
+      }
+      .login{
+        width: 450px;
+        height: 60px;
+        position: absolute;
+        margin-left: 200px;
+        margin-top: 200px;
+        font-family: 'Nunito', sans-serif;
+        font-size: 30px;
+        font-weight: 600;
+        color: white;
+        background-color: #0080ff;
+        border: 2px solid #0080ff;
+        border-radius: 30px;
+        padding-left: 10px;
+        transition: 0.5s all;
+        outline: none;
+      }
+      .login:hover{
+        background-color: white;
+        color: #0080ff;
+      }
+
+      .changePosClass{
+        margin-left: -550px;
+        border-right: 2px solid lightgrey;
+        border-radius: 0px;
+      }
+      .changePosClassLogin{
+        margin-left: -20px;
+        margin-top: 45px;
+        width: 70px;
+        height: 70px;
+        border-radius: 35px;
+        font-size: 20px;
+        text-align: center;
+      }
+      .changePosClassBorder{
+        left: 20%;
+        border-radius: 20px;
+        opacity: 1;
+      }
+      .error{
+        color: red;
+        position: absolute;
+        left: 40%;
+        top: 30%;
+      }
+      body{
+        transition: 0.5s all;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navBar navbar navbar-light bg-light justify-content-between">
+        <a href="{% url 'post_list' %}" class="navbar-brand" style="font-family: 'Playfair Display', serif; font-size: 35px; margin-left: 400px;">Blog</a>
+        <form class="form-inline">
+          {% if user.is_authenticated %}
+              <i class="adjust material-icons">account_circle</i>
+              <p class="account">Hi, {{ user.username }}!</p>   
+          {% endif %}
+          {% if user.is_authenticated == False %}
+              <a href="{% url 'login' %}" class="signin" >&#128274; Sign In</a>
+          {% endif%}
+          {% if user.is_authenticated %}
+            <button class="logout" ><a style="text-decoration: none; color: white;" href="{% url 'logout' %}">Logout</a></button>
+          {% endif %}
+        </form>
+      </nav>
+    {% block content %}
+    {% endblock %}
+    
+  </body>
+</html>

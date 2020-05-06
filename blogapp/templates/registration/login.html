@@ -1,0 +1,48 @@
+{% extends 'blogapp/base.html' %}
+
+{% block content %}
+
+
+    <a href="http://www.piyushpradhan.pythonanywhere.com" style="text-decoration: none;"><p class="blog_login">Blog</p></a>
+    <div class="border" style="border-left: 1px solid lightgrey"></div>
+    
+    <form method="POST" action="{% url 'login' %}" class="login_form">{% csrf_token %}
+            <table>
+            <tr>
+                <input type="text" name="username" autofocus required id="id_username" autocomplete="off" placeholder="username" class="username_input"/>
+            </tr>
+            <tr>
+                <input type="password" name="password" required="" id="id_password" placeholder="password" class="password_input" />
+            </tr>
+            </table>
+
+            <input type="submit" class="login" value="login"/>
+            <input type="hidden" name="next" value="{{ next }}"/>
+    </form>
+
+
+    <script>
+        const username = document.getElementById('id_username');
+        const password = document.getElementById('id_password');
+        const border = document.querySelector('.border');
+        const login = document.querySelector('.login');
+        const blogLogin = document.querySelector('.blog_login');
+        
+        username.addEventListener('click', changePos);
+        password.addEventListener('click', changePos);
+        function changePos(){   
+            username.classList.add('changePosClass');
+            password.classList.add('changePosClass');
+            border.classList.add('changePosClassBorder');
+            login.classList.add('changePosClassLogin');
+            blogLogin.style.left = 60 + '%';
+            blogLogin.style.color = "white";
+            document.body.style.backgroundColor = "black";
+        }
+
+        {% if form.errors %}
+            window.alert('Your username or password is incorrect. Please try again.');
+        {% endif %}
+
+    </script>
+{% endblock %}
